@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MR DEATH</title>
+  <style>
+    body {
+      background-color: black;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2em;
+      padding: 40px;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      text-align: left;
+      max-width: 800px;
+    }
+    #mrdeath {
+      display: none;
+      font-size: 3em;
+      margin-top: 40px;
+      text-shadow: 0 0 10px #00ff00;
+    }
+    .blinking-cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: #00ff00;
+      animation: blink 1s step-start infinite;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+  <div id="mrdeath">MR DEATH</div>
+
+  <script>
+    const lines = [
+      "Initializing sequence...",
+      "Bypassing firewalls...",
+      "Accessing hidden layers...",
+      "Decrypting shadows...",
+      "Welcome to the realm of darkness..."
+    ];
+
+    const terminal = document.getElementById("terminal");
+    const mrdeath = document.getElementById("mrdeath");
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < lines.length) {
+        const currentLine = lines[lineIndex];
+        if (charIndex < currentLine.length) {
+          terminal.textContent += currentLine.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeLine, 50);
+        } else {
+          terminal.textContent += "\n";
+          charIndex = 0;
+          lineIndex++;
+          setTimeout(typeLine, 500);
+        }
+      } else {
+        const cursor = document.createElement("span");
+        cursor.className = "blinking-cursor";
+        terminal.appendChild(cursor);
+        setTimeout(() => {
+          mrdeath.style.display = "block";
+        }, 1000);
+      }
+    }
+
+    typeLine();
+  </script>
+</body>
+</html>
